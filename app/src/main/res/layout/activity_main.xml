@@ -18,7 +18,7 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_registerData"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:text="REGISTRAR PRODUCTO"
