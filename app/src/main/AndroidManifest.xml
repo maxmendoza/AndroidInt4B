@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Integradora_android_4B">
         <activity
+            android:name=".Register"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
