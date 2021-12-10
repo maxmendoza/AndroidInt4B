@@ -18,11 +18,11 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_register"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:text="REGISTRAR PRODUCTO"
+        app:layout_constraintBottom_toTopOf="@+id/btn_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,11 +30,11 @@
         app:layout_constraintVertical_bias="0.798" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_list"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="208dp"
-        android:text="Button"
+        android:text="Inventario"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
