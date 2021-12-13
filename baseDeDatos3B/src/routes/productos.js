@@ -40,16 +40,7 @@ router.get('/:codigo', async (req, res)=> {
     });
 });
 
-//Listar productos por categoria
-router.get('/categoria/:categoria',async(req, res)=> {
-    const { cat } = req.params;
-    let quer = await pool.query('SELECT * FROM productostienda WHERE categoria = ?', [cat]);
-    res.json({
-        status: 200,
-        message: "Se ha encontrado el producto por categoria",
-        cat:quer
-    });
-});
+
 
 
 module.exports = router;
