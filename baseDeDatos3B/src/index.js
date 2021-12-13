@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 //routes
 app.use(require('./routes/index.js'));
-///app.use('/categoria', require('./routes/categoria.js'));///
+app.use('/categoria', require('./routes/categoria.js'));
 app.use('/producto', require('./routes/productos.js'));
 
 
