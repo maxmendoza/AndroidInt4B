@@ -3,13 +3,18 @@ package com.utez.edu.integradora_android_4b
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
-import android.view.View
 import android.widget.*
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 
 import com.google.zxing.integration.android.IntentIntegrator
 import com.utez.edu.integradora_android_4b.databinding.ActivityRegisterBinding
 import kotlinx.android.synthetic.main.activity_register.*
+import org.json.JSONObject
 
 
 class Register : AppCompatActivity()  {
@@ -27,7 +32,34 @@ class Register : AppCompatActivity()  {
        val edtDesc = findViewById<EditText>(R.id.edtDesc)
        val edtQuantity = findViewById<EditText>(R.id.edtQuantity)
        val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val spCategoria = findViewById<Spinner>(R.id.spCategoria)
+        val url2 = "http://172.17.64.1:4000/categoria"
+        val cola2 = Volley.newRequestQueue(this)
+        val listener = Response.Listener<JSONObject> { response ->
+            val listCategory = response.getJSONArray("listcategory")
+            var datos = mutableListOf<String>()
+            for (i in 0 until listCategory.length()) {
+                datos.add(
+                    listCategory.getJSONObject(i).getString("name")
+                )
 
+            }
+            val adaptador = ArrayAdapter(
+                this,
+                android.R.layout.simple_list_item_1,
+                datos
+            )
+            spCategoria.adapter = adaptador
+        }
+        val error = Response.ErrorListener { error ->
+            Log.e("ERROR", error.message.toString())
+        }
+        val peticion = JsonObjectRequest(
+            Request.Method.GET,
+            url2, null, listener, error
+        )
+
+        cola2.add(peticion)
 
 
 

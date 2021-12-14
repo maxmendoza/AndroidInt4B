@@ -17,8 +17,7 @@ class categoryList : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val cola = Volley.newRequestQueue(this@categoryList)
-        val url = "http://10.0.2.2:4001/producto"
-
+        val url = "http://172.17.64.1:4000/producto"
         val listener = Response.Listener<JSONObject> {response ->
             val listProducts = response.getJSONArray("products")
             var datos = mutableListOf<Producto>()

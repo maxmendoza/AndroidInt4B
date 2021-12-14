@@ -1,12 +1,10 @@
 package com.utez.edu.integradora_android_4b
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.LinearLayout
 import android.widget.TextView
 import kotlin.collections.List
 
@@ -27,13 +25,11 @@ class CustomAdapter (val context: Context, val layout:Int, val  datos : List<Pro
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = inflater.inflate(layout,parent,false)
         val txtNombre = view.findViewById<TextView>(R.id.txtName)
-        val txtDescripcion = view.findViewById<TextView>(R.id.txtDescripcion)
+        val txtDescripcion = view.findViewById<TextView>(R.id.txtNameCat)
         val categoria = view.findViewById<TextView>(R.id.txtCat)
         val txtCan = view.findViewById<TextView>(R.id.txtCantidad)
         val txtCodigoBarras = view.findViewById<TextView>(R.id.txtCodigoBarra)
-
         val data = getItem(position) as Producto
-
         txtNombre.text = data.name
         txtDescripcion.text = data.descripcion
         categoria.text = data.categoría.toString()
@@ -41,5 +37,4 @@ class CustomAdapter (val context: Context, val layout:Int, val  datos : List<Pro
         txtCodigoBarras.text = data.codigo
         return view
     }
-
 }

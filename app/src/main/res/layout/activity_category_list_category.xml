@@ -6,15 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".categoryListCategory">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="Listar por categoria"
+    <ListView
+        android:id="@+id/listViewCat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<ListView-->
+<!--android:id="@+id/listView"-->
+<!--android:layout_width="0dp"-->
+<!--android:layout_height="0dp"-->
+<!--app:layout_constraintBottom_toBottomOf="parent"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintHorizontal_bias="0.5"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toTopOf="parent" />-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
