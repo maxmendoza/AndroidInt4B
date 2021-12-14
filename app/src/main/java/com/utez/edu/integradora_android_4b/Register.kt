@@ -11,12 +11,14 @@ import android.widget.ImageView
 
 
 
-class Register : AppCompatActivity() {
+class Register : AppCompatActivity()  {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-       val btnCamera = findViewById<Button>(R.id.btnCamera)
+
+       val btnCamera = findViewById<Button>(R.id.btnScanner)
        val edtName = findViewById<EditText>(R.id.edtName)
        val edtDesc = findViewById<EditText>(R.id.edtDesc)
        val edtQuantity = findViewById<EditText>(R.id.edtQuantity)
@@ -31,5 +33,6 @@ class Register : AppCompatActivity() {
 
         }
     }
+
 
 }

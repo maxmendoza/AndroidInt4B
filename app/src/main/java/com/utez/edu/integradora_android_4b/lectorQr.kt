@@ -5,14 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.google.zxing.integration.android.IntentIntegrator
-import com.utez.edu.integradora_android_4b.databinding.ActivityMainBinding
+import com.utez.edu.integradora_android_4b.databinding.ActivityRegisterBinding
 
 
 class lectorQr : AppCompatActivity() {
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var binding:ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnScanner.setOnClickListener { initScanner() }
     }

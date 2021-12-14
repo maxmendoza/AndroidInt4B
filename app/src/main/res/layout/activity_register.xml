@@ -7,7 +7,7 @@
     tools:context=".Register">
 
     <Button
-        android:id="@+id/btnCamera"
+        android:id="@+id/btnScanner"
         android:layout_width="332dp"
         android:layout_height="35dp"
         android:text="Camara"
@@ -76,10 +76,10 @@
         android:hint="Codigo de barras"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnCamera"
+        app:layout_constraintEnd_toEndOf="@+id/btnScanner"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnCamera"
-        app:layout_constraintTop_toBottomOf="@+id/btnCamera"
+        app:layout_constraintStart_toStartOf="@+id/btnScanner"
+        app:layout_constraintTop_toBottomOf="@+id/btnScanner"
         app:layout_constraintVertical_bias="0.13" />
 
     <Button
