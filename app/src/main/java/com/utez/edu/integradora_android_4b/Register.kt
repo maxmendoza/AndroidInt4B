@@ -19,6 +19,7 @@ class Register : AppCompatActivity()  {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_register)
         setContentView(binding.root)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.btnScanner.setOnClickListener { initScanner() }
 
         val txtBarCode = findViewById<TextView>(R.id.txtBarCode)

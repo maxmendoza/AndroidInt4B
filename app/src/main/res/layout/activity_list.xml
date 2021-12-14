@@ -7,5 +7,49 @@
     tools:context=".List">
 
 
+    <Button
+        android:id="@+id/btnListAll"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="224dp"
+        android:text="Listar Todos los productos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnListCat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Listar por categoria"
+        app:layout_constraintEnd_toEndOf="@+id/btnListAll"
+        app:layout_constraintStart_toStartOf="@+id/btnListAll"
+        app:layout_constraintTop_toBottomOf="@+id/btnListAll" />
+
+    <Button
+        android:id="@+id/btnListBarCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Obtener producto por codigo de barras"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnListCat"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnListCat"
+        app:layout_constraintTop_toBottomOf="@+id/btnListCat"
+        app:layout_constraintVertical_bias="0.049" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.049"
+        app:srcCompat="@drawable/tienda3b" />
 </androidx.constraintlayout.widget.ConstraintLayout>
