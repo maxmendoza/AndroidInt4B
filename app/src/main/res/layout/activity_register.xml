@@ -6,29 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Register">
 
-    <ImageView
-        android:id="@+id/cam_visor"
-        android:layout_width="331dp"
-        android:layout_height="190dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCamera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.937"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <Button
         android:id="@+id/btnCamera"
         android:layout_width="332dp"
         android:layout_height="35dp"
         android:text="Camara"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/cam_visor"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/cam_visor"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.837" />
+        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
+        app:layout_constraintStart_toStartOf="@+id/btnRegister"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+        app:layout_constraintVertical_bias="0.069" />
 
     <EditText
         android:id="@+id/edtName"
@@ -63,12 +50,10 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/cam_visor"
         app:layout_constraintEnd_toEndOf="@+id/edtQuantity"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edtQuantity"
-        app:layout_constraintTop_toBottomOf="@+id/edtQuantity"
-        app:layout_constraintVertical_bias="0.16" />
+        app:layout_constraintTop_toBottomOf="@+id/edtQuantity" />
 
     <EditText
         android:id="@+id/edtDesc"
@@ -92,7 +77,20 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnCamera"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnCamera"
-        app:layout_constraintTop_toBottomOf="@+id/btnCamera" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCamera"
+        app:layout_constraintVertical_bias="0.13" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spCategoria" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
