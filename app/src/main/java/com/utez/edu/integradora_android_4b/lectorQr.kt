@@ -31,6 +31,7 @@ class lectorQr : AppCompatActivity() {
                 Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show()
             }else if(result.contents == "7500478024827") {
                 Toast.makeText(this, "papas sabritas bien caras alv", Toast.LENGTH_SHORT).show()
+
             } else {
                 Toast.makeText(this, "El valor escaneado es: " + result.contents, Toast.LENGTH_LONG).show()
             }
