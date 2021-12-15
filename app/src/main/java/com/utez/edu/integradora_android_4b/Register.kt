@@ -30,7 +30,7 @@ class Register : AppCompatActivity() {
         val edtDescripcion = findViewById<EditText>(R.id.edtDesc)
         val spCategory = findViewById<Spinner>(R.id.spCategoria)
         val edtCantidad = findViewById<EditText>(R.id.edtQuantity)
-        val txtBarCode = binding.txtBarCode
+        val txtBarCode = findViewById<TextView>(R.id.txtBarCode)
 
 
 //        Variables para la conexion a base de datos
@@ -109,7 +109,7 @@ class Register : AppCompatActivity() {
                 objeto.put("descripcion", edtDescripcion.text.toString())
                 objeto.put("categoria", (spCategory.selectedItemId+1).toString())
                 objeto.put("cantidad", edtCantidad.text.toString())
-                objeto.put("codigo", testeo)
+                objeto.put("codigo", txtBarCode.text.toString())
                 val peticion = JsonObjectRequest(
                     Request.Method.POST,
                     url, objeto, listener, error
