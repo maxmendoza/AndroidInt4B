@@ -75,6 +75,7 @@ class Register : AppCompatActivity()  {
         integrator.setBeepEnabled(true)
         integrator.initiateScan()
     }
+    ////Lector de Codigo De Barras
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {

@@ -16,9 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Integradora_android_4B">
         <activity
-            android:name=".Categoria"
-            android:exported="true" />
-        <activity
             android:name=".lectorQr"
             android:exported="true" />
         <activity
