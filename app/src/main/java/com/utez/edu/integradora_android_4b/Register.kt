@@ -24,22 +24,15 @@ class Register : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_register)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        //         Declaracion de variables
         val btnRegister = findViewById<Button>(R.id.btnRegister)
         val edtName = findViewById<EditText>(R.id.edtName)
         val edtDescripcion = findViewById<EditText>(R.id.edtDesc)
         val spCategory = findViewById<Spinner>(R.id.spCategoria)
         val edtCantidad = findViewById<EditText>(R.id.edtQuantity)
         val txtBarCode = findViewById<TextView>(R.id.txtBarCode)
-
-
-//        Variables para la conexion a base de datos
-
         val queue = Volley.newRequestQueue(this)
         val url = "http://172.17.64.1:4000/producto/create/"
          val url2 = "http://172.17.64.1:4000/categoria"
-
-       ///Spinner
         val cola2 = Volley.newRequestQueue(this)
         val listener2 = Response.Listener<JSONObject> { response ->
             val listCategory = response.getJSONArray("listcategory")
@@ -64,12 +57,7 @@ class Register : AppCompatActivity() {
             Request.Method.GET,
             url2, null, listener2, error2
         )
-
         cola2.add(peticion)
-
-
-
-        //CREATE
         val listener = Response.Listener<JSONObject> { response ->
             val estado = response.getJSONObject("products").getString("name")
             if (estado == edtName.text.toString()) {
@@ -90,8 +78,7 @@ class Register : AppCompatActivity() {
             Toast.makeText(
                 this,
                 "Error, algo ha pasao ajeno a la aplicación, vuelve a intentar mas tarde",
-                Toast.LENGTH_SHORT
-            ).show()
+                Toast.LENGTH_SHORT).show()
         }
         queue.add(peticion)
         binding.btnScanner.setOnClickListener { initScanner() }
