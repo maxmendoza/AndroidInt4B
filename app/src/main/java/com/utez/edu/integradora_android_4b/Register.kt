@@ -17,25 +17,31 @@ import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONObject
 
 
-open class Register : AppCompatActivity()  {
-    open lateinit var binding: ActivityRegisterBinding
+class Register : AppCompatActivity() {
+    lateinit var binding: ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_register)
-        setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.btnScanner.setOnClickListener { initScanner() }
+        //         Declaracion de variables
+        val btnRegister = findViewById<Button>(R.id.btnRegister)
+        val edtName = findViewById<EditText>(R.id.edtName)
+        val edtDescripcion = findViewById<EditText>(R.id.edtDesc)
+        val spCategory = findViewById<Spinner>(R.id.spCategoria)
+        val edtCantidad = findViewById<EditText>(R.id.edtQuantity)
+        val txtBarCode = binding.txtBarCode
 
-        val txtBarCode = findViewById<TextView>(R.id.txtBarCode)
-       val edtName = findViewById<EditText>(R.id.edtName)
-       val edtDesc = findViewById<EditText>(R.id.edtDesc)
-       val edtQuantity = findViewById<EditText>(R.id.edtQuantity)
-       val btnRegister = findViewById<Button>(R.id.btnRegister)
-        val spCategoria = findViewById<Spinner>(R.id.spCategoria)
-        val url2 = "http://172.17.64.1:4000/categoria"
+
+//        Variables para la conexion a base de datos
+
+        val queue = Volley.newRequestQueue(this)
+        val url = "http://172.17.64.1:4000/producto/create/"
+         val url2 = "http://172.17.64.1:4000/categoria"
+
+       ///Spinner
         val cola2 = Volley.newRequestQueue(this)
-        val listener = Response.Listener<JSONObject> { response ->
+        val listener2 = Response.Listener<JSONObject> { response ->
             val listCategory = response.getJSONArray("listcategory")
             var datos = mutableListOf<String>()
             for (i in 0 until listCategory.length()) {
@@ -51,94 +57,95 @@ open class Register : AppCompatActivity()  {
             )
             spCategoria.adapter = adaptador
         }
-        val error = Response.ErrorListener { error ->
+        val error2 = Response.ErrorListener { error ->
             Log.e("ERROR", error.message.toString())
         }
         val peticion = JsonObjectRequest(
             Request.Method.GET,
-            url2, null, listener, error
+            url2, null, listener2, error2
         )
 
         cola2.add(peticion)
 
 
-        btnRegister.setOnClickListener(){
 
+        //CREATE
+        val listener = Response.Listener<JSONObject> { response ->
+            val estado = response.getJSONObject("products").getString("name")
+            if (estado == edtName.text.toString()) {
+                Toast.makeText(
+                    this,
+                    "Se ha insertado correctamente",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    "No se ha insertado correctamente",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        val error = Response.ErrorListener { error ->
+            Toast.makeText(
+                this,
+                "Error, algo ha pasao ajeno a la aplicación, vuelve a intentar mas tarde",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        queue.add(peticion)
+        binding.btnScanner.setOnClickListener { initScanner() }
+        btnRegister.setOnClickListener {
+            if (edtName.text.toString() == "" || edtDesc.text.toString() == "" || edtQuantity.text.toString() == "") {
+                Toast.makeText(
+                    this,
+                    "Tienes que rellenar todos los campos solicitados",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                val testeo = "2020"
+                val objeto = JSONObject()
+                objeto.put("name", edtName.text.toString())
+                objeto.put("descripcion", edtDescripcion.text.toString())
+                objeto.put("categoria", (spCategory.selectedItemId+1).toString())
+                objeto.put("cantidad", edtCantidad.text.toString())
+                objeto.put("codigo", testeo)
+                val peticion = JsonObjectRequest(
+                    Request.Method.POST,
+                    url, objeto, listener, error
+                )
+                queue.add(peticion)
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
         }
     }
-    open fun initScanner(){
+
+
+    //Funcion para el lector de codigo de barras
+
+    private fun initScanner() {
         val integrator = IntentIntegrator(this)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
-        integrator.setPrompt("ESCANEANDO")
-        integrator.setTorchEnabled(true)
+        integrator.setPrompt("Acerque el codigo a la camara")
         integrator.setBeepEnabled(true)
         integrator.initiateScan()
     }
-    ////Lector de Codigo De Barras
-    open override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+
+    // Para recuperar los datos previamente ingresados
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
                 Toast.makeText(this, "Cancelado", Toast.LENGTH_LONG).show()
-            }
-            /*else if(result.contents == "7500478024827") {
-
-                Toast.makeText(this, "papas sabritas bien caras alv", Toast.LENGTH_LONG).show()
-            }*/ else {
-                Toast.makeText(this, "El valor escaneado es: " + result.contents, Toast.LENGTH_LONG).show()
-                txtBarCode.text= result.contents.toString()
-                btnRegister.setOnClickListener(){
-                   /// peticion
-                    val cola = Volley.newRequestQueue(this)
-                    var urlRegister = "http://172.17.64.1:4000/producto/create/"
-                    val error = Response.ErrorListener { error ->
-                        Toast.makeText(this, error.message.toString(), Toast.LENGTH_SHORT).show()
-                    }
-                    val listener = Response.Listener<JSONObject> { resultado ->
-                        //Indicar al usuario el resultado
-                        if("insertId" in resultado.names().toString() && resultado.getInt("insertId") != 0){
-                            Toast.makeText(this, "Registro insertado", Toast.LENGTH_SHORT).show()
-                            //Limpiar formulario
-                            edtName.setText("")
-                            edtDesc.setText("")
-                            edtQuantity.setText("")
-                            spCategoria.setSelection(0)
-                            txtBarCode.setText("")
-                        }else {
-                            Toast.makeText(this, "No se pudo realizar el registro", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    }
-                    //Recuperar datos
-                    val name = edtName.text.toString()
-                    val descripcion = edtDesc.text.toString()
-                    val categoria = (spCategoria.selectedItemId+1).toString()
-                    val codigo = txtBarCode.text.toString()
-                    val cantidad = edtQuantity.text.toString()
-
-                    //Validación
-                    if(name != "" && descripcion != "" && categoria != "" && codigo != "" && cantidad != ""){
-                        //Crear body
-                        val body = JSONObject()
-                        body.put("name", name)
-                        body.put("descripcion", descripcion)
-                        body.put("categoria", categoria)
-                        body.put("cantidad", cantidad)
-                        body.put("codigo",codigo)
-
-                        //Hacer peticion/Añadir a la cola
-                        val peticion = JsonObjectRequest(Request.Method.POST, urlRegister, body, listener, error)
-                        cola.add(peticion)
-                    }else{
-                        Toast.makeText(this, "Faltan datos", Toast.LENGTH_SHORT).show()
-                    }
-                    urlRegister = "http://172.17.64.1:4000/producto/create/"
-                }
+            } else {
+                binding.txtBarCode.setText(result.contents)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+
     }
-
-
 }
