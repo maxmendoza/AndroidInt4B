@@ -112,17 +112,17 @@ open class Register : AppCompatActivity()  {
                     //Recuperar datos
                     val name = edtName.text.toString()
                     val descripcion = edtDesc.text.toString()
-                    val tipo = spCategoria.selectedItem.toString()
+                    val categoria = (spCategoria.selectedItemId+1).toString()
                     val codigo = txtBarCode.text.toString()
                     val cantidad = edtQuantity.text.toString()
 
                     //Validación
-                    if(name != "" && descripcion != "" && tipo != "" && codigo != "" && cantidad != ""){
+                    if(name != "" && descripcion != "" && categoria != "" && codigo != "" && cantidad != ""){
                         //Crear body
                         val body = JSONObject()
                         body.put("name", name)
                         body.put("descripcion", descripcion)
-                        body.put("categoria", tipo)
+                        body.put("categoria", categoria)
                         body.put("cantidad", cantidad)
                         body.put("codigo",codigo)
 
