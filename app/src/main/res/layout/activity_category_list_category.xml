@@ -6,15 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".categoryListCategory">
 
-    <ListView
-        android:id="@+id/listViewCat"
+
+    <Spinner
+        android:id="@+id/spCategoryList"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnListCategory"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnListCategory"
+        app:layout_constraintTop_toBottomOf="@+id/btnListCategory"
+        app:layout_constraintVertical_bias="0.02" />
+
+    <Button
+        android:id="@+id/btnListCategory"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Listar por Categoria"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Listar por Categoria" />
+
+    <TextView
+        android:id="@+id/testeoId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="testeoId"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.266" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--<ListView-->
