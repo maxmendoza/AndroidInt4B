@@ -17,8 +17,8 @@ import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONObject
 
 
-class Register : AppCompatActivity()  {
-    private lateinit var binding: ActivityRegisterBinding
+open class Register : AppCompatActivity()  {
+    open lateinit var binding: ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -62,12 +62,11 @@ class Register : AppCompatActivity()  {
         cola2.add(peticion)
 
 
-
         btnRegister.setOnClickListener(){
 
         }
     }
-    private fun initScanner(){
+    open fun initScanner(){
         val integrator = IntentIntegrator(this)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
         integrator.setPrompt("ESCANEANDO")
@@ -76,7 +75,7 @@ class Register : AppCompatActivity()  {
         integrator.initiateScan()
     }
     ////Lector de Codigo De Barras
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    open override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
             if (result.contents == null) {
@@ -88,6 +87,53 @@ class Register : AppCompatActivity()  {
             }*/ else {
                 Toast.makeText(this, "El valor escaneado es: " + result.contents, Toast.LENGTH_LONG).show()
                 txtBarCode.text= result.contents.toString()
+                btnRegister.setOnClickListener(){
+                   /// peticion
+                    val cola = Volley.newRequestQueue(this)
+                    var urlRegister = "http://172.17.64.1:4000/producto/create/"
+                    val error = Response.ErrorListener { error ->
+                        Toast.makeText(this, error.message.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                    val listener = Response.Listener<JSONObject> { resultado ->
+                        //Indicar al usuario el resultado
+                        if("insertId" in resultado.names().toString() && resultado.getInt("insertId") != 0){
+                            Toast.makeText(this, "Registro insertado", Toast.LENGTH_SHORT).show()
+                            //Limpiar formulario
+                            edtName.setText("")
+                            edtDesc.setText("")
+                            edtQuantity.setText("")
+                            spCategoria.setSelection(0)
+                            txtBarCode.setText("")
+                        }else {
+                            Toast.makeText(this, "No se pudo realizar el registro", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                    //Recuperar datos
+                    val name = edtName.text.toString()
+                    val descripcion = edtDesc.text.toString()
+                    val tipo = spCategoria.selectedItem.toString()
+                    val codigo = txtBarCode.text.toString()
+                    val cantidad = edtQuantity.text.toString()
+
+                    //Validación
+                    if(name != "" && descripcion != "" && tipo != "" && codigo != "" && cantidad != ""){
+                        //Crear body
+                        val body = JSONObject()
+                        body.put("name", name)
+                        body.put("descripcion", descripcion)
+                        body.put("categoria", tipo)
+                        body.put("cantidad", cantidad)
+                        body.put("codigo",codigo)
+
+                        //Hacer peticion/Añadir a la cola
+                        val peticion = JsonObjectRequest(Request.Method.POST, urlRegister, body, listener, error)
+                        cola.add(peticion)
+                    }else{
+                        Toast.makeText(this, "Faltan datos", Toast.LENGTH_SHORT).show()
+                    }
+                    urlRegister = "http://172.17.64.1:4000/producto/create/"
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

@@ -9,6 +9,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_category_list.*
+import kotlinx.android.synthetic.main.activity_category_list_category.*
 import org.json.JSONObject
 
 class categoryListCategory : AppCompatActivity() {
@@ -18,7 +19,7 @@ class categoryListCategory : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val spCategoryList = findViewById<Spinner>(R.id.spCategoryList)
         val btnListCategory = findViewById<Button>(R.id.btnListCategory)
-        val testeoId = findViewById<TextView>(R.id.testeoId)
+        val listViewCategory = findViewById<ListView>(R.id.listViewCategory)
         val cola3 = Volley.newRequestQueue(this)
         val url2 = "http://172.17.64.1:4000/categoria"
             val listener = Response.Listener<JSONObject> { response ->
@@ -69,8 +70,8 @@ class categoryListCategory : AppCompatActivity() {
                     )
                 }
 
-                val adaptador = CustomAdapter(this,R.layout.activity_categoria, datos)
-                listView.adapter = adaptador;
+                val adaptador = CustomAdapter(this,R.layout.layout_productos, datos)
+                listViewCategory.adapter = adaptador;
             }
 
             val error = Response.ErrorListener { error ->
@@ -81,31 +82,5 @@ class categoryListCategory : AppCompatActivity() {
             cola.add(peticion)
             url3 = "http://172.17.64.1:4000/categoria/categoria/"
             }
-
-
         }
-//            val listProducts = response.getJSONArray("products")
-//            var datosCat = mutableListOf<Categoria>()
-//
-//            for (i in 0 until listProducts.length()){
-//                datosCat.add(
-//                    Categoria(
-//                        listProducts.getJSONObject(i).getInt("id"),
-//                        listProducts.getJSONObject(i).getString("name")
-//                    )
-//                )
-//            }
-//
-//            val adaptador = CustomAdapter(this@categoryListCategory,R.layout.layout_productos, )
-//            listView.adapter = adaptador;
-//        }
-//
-//        val error = Response.ErrorListener { error ->
-//            Toast.makeText(this@categoryListCategory,error.message.toString(),Toast.LENGTH_SHORT).show()
-//        }
-//
-//        val peticion = JsonObjectRequest(Request.Method.GET,url,null,listener,error)
-//        cola.add(peticion)
-//
-
     }
